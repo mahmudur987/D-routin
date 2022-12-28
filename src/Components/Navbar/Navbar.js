@@ -31,6 +31,9 @@ const MyNavbar = () => {
           <Link to={"/completetask"} active={true}>
             COMPLETED TASKS
           </Link>
+          <Link to={"/counter"} active={true}>
+            COUNTER
+          </Link>
         </NavbarCollapse>
       </Navbar>
     </div>
