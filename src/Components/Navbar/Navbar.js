@@ -3,12 +3,30 @@ import { NavbarBrand } from "flowbite-react/lib/esm/components/Navbar/NavbarBran
 import { NavbarCollapse } from "flowbite-react/lib/esm/components/Navbar/NavbarCollapse";
 import { NavbarLink } from "flowbite-react/lib/esm/components/Navbar/NavbarLink";
 import { NavbarToggle } from "flowbite-react/lib/esm/components/Navbar/NavbarToggle";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import Switcher from "../DarkSide/Switcher";
+import { getAuth, signOut } from "firebase/auth";
+import app from "../../Firebase/Firebase.config";
+import { userContext } from "../../App";
+
+const auth = getAuth(app);
 
 const MyNavbar = () => {
+  const { user } = useContext(userContext);
+  // console.log(user);
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
   return (
-    <div>
+    <div className="dark:text-white dark:bg-slate-600">
       <Navbar fluid={true} rounded={true}>
         <NavbarBrand>
           <img
@@ -33,6 +51,27 @@ const MyNavbar = () => {
           </Link>
           <Link to={"/counter"} active={true}>
             COUNTER
+          </Link>
+
+          {user ? (
+            <Link>
+              <button onClick={handleSignOut} to={"/signup"} active={true}>
+                SIGNOUT
+              </button>
+            </Link>
+          ) : (
+            <>
+              <Link to={"/login"} active={true}>
+                LOGIN
+              </Link>
+              <Link to={"/signup"} active={true}>
+                SIGNUP
+              </Link>
+            </>
+          )}
+
+          <Link active={true}>
+            <Switcher></Switcher>
           </Link>
         </NavbarCollapse>
       </Navbar>

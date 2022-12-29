@@ -4,7 +4,7 @@ import MyNavbar from "../Components/Navbar/Navbar";
 
 const Main = () => {
   return (
-    <div>
+    <div className="lg:w-9/12 md:w-11/12 mx-auto">
       <MyNavbar></MyNavbar>
       <Outlet></Outlet>
     </div>
