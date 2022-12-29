@@ -1,7 +1,7 @@
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
 import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { userContext } from "../../App";
 
 const AddTask = () => {
@@ -9,12 +9,12 @@ const AddTask = () => {
   const [image, SetImage] = useState("");
   const [task, SetTask] = useState("");
   const [loading, setloading] = useState(false);
-  const location = useLocation();
+  const navigate = useNavigate();
   // console.log(user);
   const handleSubmit = (e) => {
     if (!user) {
       toast.error("please logIn first");
-      return <Navigate to="/login"></Navigate>;
+      return navigate("/signup");
     }
     e.preventDefault();
     setloading(true);
