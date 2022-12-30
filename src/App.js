@@ -11,7 +11,7 @@ const auth = getAuth(app);
 const queryClient = new QueryClient();
 export const userContext = createContext("");
 function App() {
-  const [user, Setuser] = useState(null);
+  const [user, Setuser] = useState({});
 
   useEffect(() => {
     const unsubscribe = () => {

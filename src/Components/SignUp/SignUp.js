@@ -1,16 +1,18 @@
 import React from "react";
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import app from "../../Firebase/Firebase.config";
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import { Button, Label, Spinner, TextInput } from "flowbite-react";
 const auth = getAuth(app);
 
 const SignUp = () => {
+  const [loading, Setloading] = useState(false);
+
   const [error, SetError] = useState("");
   const [photo, setphoto] = useState(null);
 
@@ -18,6 +20,7 @@ const SignUp = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const handleSubmit = (event) => {
+    Setloading(true);
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
@@ -35,16 +38,16 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then((imagedata) => {
-        // console.log(imagedata);
+        console.log(imagedata);
         const photoURL = imagedata.data.display_url;
         if (imagedata.success) {
           createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
               const user = result.user;
+              console.log(user);
+
               handleUpdateProfile(name, photoURL);
               navigate(from, { replace: true });
-
-              // console.log(user);
             })
             .catch((error) => {
               const errorMessage = error.message;
@@ -66,7 +69,15 @@ const SignUp = () => {
       .catch((error) => {
         SetError(error.message);
       });
+    Setloading(false);
   };
+  if (loading) {
+    return (
+      <div className="flex items-center w-full h-96 justify-center">
+        <Spinner aria-label="Extra large spinner example" size="xl" />
+      </div>
+    );
+  }
 
   return (
     <div className="md:w-9/12 lg:2/3 mx-auto">

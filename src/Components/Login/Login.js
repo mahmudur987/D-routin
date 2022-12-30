@@ -3,16 +3,18 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from "../../Firebase/Firebase.config";
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import { Button, Checkbox, Label, Spinner, TextInput } from "flowbite-react";
 const auth = getAuth(app);
 
 const LogIn = () => {
   const [error, SetError] = useState("");
+  const [loading, Setloading] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const handleSubmit = (event) => {
+    Setloading(true);
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
@@ -21,6 +23,7 @@ const LogIn = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        console.log(user);
         navigate(from, { replace: true });
 
         // ...
@@ -29,8 +32,16 @@ const LogIn = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         SetError(errorMessage);
+        Setloading(false);
       });
   };
+  if (loading) {
+    return (
+      <div className="flex items-center w-full h-96 justify-center">
+        <Spinner aria-label="Extra large spinner example" size="xl" />
+      </div>
+    );
+  }
 
   return (
     <div className="md:w-9/12 lg:2/3 mx-auto">

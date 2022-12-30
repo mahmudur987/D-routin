@@ -1,4 +1,4 @@
-import { Navbar } from "flowbite-react";
+import { Button, Navbar } from "flowbite-react";
 import { NavbarBrand } from "flowbite-react/lib/esm/components/Navbar/NavbarBrand";
 import { NavbarCollapse } from "flowbite-react/lib/esm/components/Navbar/NavbarCollapse";
 import { NavbarLink } from "flowbite-react/lib/esm/components/Navbar/NavbarLink";
@@ -55,9 +55,9 @@ const MyNavbar = () => {
 
           {user ? (
             <Link>
-              <button onClick={handleSignOut} to={"/signup"} active={true}>
+              <Button onClick={handleSignOut} to={"/signup"} active={true}>
                 SIGNOUT
-              </button>
+              </Button>
             </Link>
           ) : (
             <>
