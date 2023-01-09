@@ -1,7 +1,7 @@
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
 import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { userContext } from "../../App";
 
 const AddTask = () => {
@@ -60,14 +60,14 @@ const AddTask = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center w-full h-96 justify-center">
+      <div className="flex items-center w-full h-96 justify-center  dark:bg-slate-900 dark:text-white">
         <Spinner aria-label="Extra large spinner example" size="xl" />
       </div>
     );
   }
 
   return (
-    <div className="mt-20 w-full border-black border p-3 rounded-lg  md:w-11/12 mx-auto lg:w-1/2">
+    <div className="mt-20  border-black border p-3 rounded-lg w-11/12 mx-auto  dark:bg-slate-900 dark:text-white lg:w-1/2">
       <h1 className="text-3xl text-center font-bold">Add New Task</h1>
 
       <div className="mt-20">
@@ -90,7 +90,6 @@ const AddTask = () => {
             </div>
             <input
               required
-              // onChange={(e) => SetTask(e.target.value)}
               defaultValue={user?.displayName}
               name="name"
               id="large"

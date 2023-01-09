@@ -25,11 +25,8 @@ const LogIn = () => {
         const user = userCredential.user;
         console.log(user);
         navigate(from, { replace: true });
-
-        // ...
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         SetError(errorMessage);
         Setloading(false);
@@ -37,14 +34,14 @@ const LogIn = () => {
   };
   if (loading) {
     return (
-      <div className="flex items-center w-full h-96 justify-center">
+      <div className="flex items-center w-full h-96 justify-center dark:bg-slate-900 dark:text-white  ">
         <Spinner aria-label="Extra large spinner example" size="xl" />
       </div>
     );
   }
 
   return (
-    <div className="md:w-9/12 lg:2/3 mx-auto">
+    <div className="md:w-9/12 lg:7/12 mx-auto w-11/12  dark:bg-slate-900 dark:text-white ">
       <h1 className="text-4xl underline font-extrabold m-3 p-3">Log In</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

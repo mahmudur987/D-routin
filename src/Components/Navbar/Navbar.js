@@ -1,7 +1,6 @@
-import { Button, Navbar } from "flowbite-react";
+import { Navbar } from "flowbite-react";
 import { NavbarBrand } from "flowbite-react/lib/esm/components/Navbar/NavbarBrand";
 import { NavbarCollapse } from "flowbite-react/lib/esm/components/Navbar/NavbarCollapse";
-import { NavbarLink } from "flowbite-react/lib/esm/components/Navbar/NavbarLink";
 import { NavbarToggle } from "flowbite-react/lib/esm/components/Navbar/NavbarToggle";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
@@ -14,19 +13,15 @@ const auth = getAuth(app);
 
 const MyNavbar = () => {
   const { user } = useContext(userContext);
-  // console.log(user);
+
   const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
+    return signOut(auth)
+      .then(() => {})
+      .catch((error) => {});
   };
 
   return (
-    <div className="dark:text-white dark:bg-slate-600">
+    <div className=" dark:bg-slate-900 dark:text-white">
       <Navbar fluid={true} rounded={true}>
         <NavbarBrand>
           <img
@@ -40,37 +35,23 @@ const MyNavbar = () => {
         </NavbarBrand>
         <NavbarToggle />
         <NavbarCollapse>
-          <Link to={"/"} active={true}>
-            ADD TASK
-          </Link>
-          <Link to={"/mytask"} active={true}>
-            MY TASKS
-          </Link>
-          <Link to={"/completetask"} active={true}>
-            COMPLETED TASKS
-          </Link>
-          <Link to={"/counter"} active={true}>
-            COUNTER
-          </Link>
+          <Link to={"/"}>ADD TASK</Link>
+          <Link to={"/mytask"}>MY TASKS</Link>
+          <Link to={"/completetask"}>COMPLETED TASKS</Link>
+          <Link to={"/counter"}>COUNTER</Link>
 
           {user ? (
             <Link>
-              <Button onClick={handleSignOut} to={"/signup"} active={true}>
-                SIGNOUT
-              </Button>
+              <button onClick={handleSignOut}>SIGNOUT</button>
             </Link>
           ) : (
             <>
-              <Link to={"/login"} active={true}>
-                LOGIN
-              </Link>
-              <Link to={"/signup"} active={true}>
-                SIGNUP
-              </Link>
+              <Link to={"/login"}>LOGIN</Link>
+              <Link to={"/signup"}>SIGNUP</Link>
             </>
           )}
 
-          <Link active={true}>
+          <Link>
             <Switcher></Switcher>
           </Link>
         </NavbarCollapse>

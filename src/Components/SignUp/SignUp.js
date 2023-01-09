@@ -80,7 +80,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className="md:w-9/12 lg:2/3 mx-auto">
+    <div className="md:w-9/12 lg:2/3 w-11/12 mx-auto dark:bg-slate-900 dark:text-white">
       <h1 className="text-4xl underline font-extrabold m-3 p-3">SIGN UP</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

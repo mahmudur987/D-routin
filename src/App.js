@@ -11,16 +11,14 @@ const auth = getAuth(app);
 const queryClient = new QueryClient();
 export const userContext = createContext("");
 function App() {
-  const [user, Setuser] = useState({});
+  const [user, Setuser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = () => {
-      onAuthStateChanged(auth, (currentUser) => {
-        console.log(currentUser);
-        Setuser(currentUser);
-      });
-    };
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      Setuser(currentUser);
 
+      console.log("currentuser", currentUser);
+    });
     return () => {
       unsubscribe();
     };

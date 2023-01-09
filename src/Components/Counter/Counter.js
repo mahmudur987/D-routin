@@ -7,7 +7,7 @@ const Counter = () => {
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
   return (
-    <div>
+    <div className="dark:bg-slate-900 dark:text-white">
       <div className="w-3/4 mx-auto">
         <Card>
           <div>

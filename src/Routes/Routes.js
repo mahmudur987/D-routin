@@ -48,4 +48,14 @@ export const routes = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "*",
+    element: (
+      <div>
+        <h1 className="text-5xl text-center font-bold">
+          This page is under Maintanence
+        </h1>
+      </div>
+    ),
+  },
 ]);

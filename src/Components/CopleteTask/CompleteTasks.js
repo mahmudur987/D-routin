@@ -12,10 +12,10 @@ const CompleteTasks = () => {
     data: tasks,
     refetch,
   } = useQuery({
-    queryKey: ["completetasks", `${user.email}`],
+    queryKey: ["completetasks", `${user?.email}`],
     queryFn: () =>
       fetch(
-        `https://my-tasks-server.vercel.app/completetasks?email=${user.email}`
+        `https://my-tasks-server.vercel.app/completetasks?email=${user?.email}`
       ).then((res) => res.json()),
   });
 
@@ -23,14 +23,14 @@ const CompleteTasks = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center w-full h-96 justify-center">
+      <div className="flex items-center w-full h-96 dark:bg-slate-900 dark:text-white  justify-center">
         <Spinner aria-label="Extra large spinner example" size="xl" />
       </div>
     );
   }
 
   if (error) {
-    return <div>An error has occurred: {error.message};</div>;
+    return <div>An error has occurred: {error?.message};</div>;
   }
 
   return (

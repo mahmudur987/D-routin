@@ -23,7 +23,7 @@ const MyTasks = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center w-full h-96 justify-center">
+      <div className="flex items-center w-full h-96 justify-center   dark:bg-slate-900 dark:text-white">
         <Spinner aria-label="Extra large spinner example" size="xl" />
       </div>
     );
@@ -34,7 +34,7 @@ const MyTasks = () => {
   }
 
   return (
-    <div className=" mt-10">
+    <div className=" mt-10  dark:bg-slate-900 dark:text-white">
       <h1 className="text-3xl font-bold">MY TASKS</h1>
 
       <div className=" grid gap-5">
