@@ -34,13 +34,32 @@ const MyTasks = () => {
   }
 
   return (
-    <div className=" mt-10  dark:bg-slate-900 dark:text-white">
-      <h1 className="text-3xl font-bold">MY TASKS</h1>
+    <div className="container mx-auto   dark:bg-slate-900 dark:text-white">
+      <div className="mt-10  flex justify-center flex-col items-center gap-10">
+        <h1 className="text-3xl font-bold">MY TASKS</h1>
 
-      <div className=" grid gap-5">
-        {tasks.map((task, idx) => (
-          <Task refetch={refetch} key={idx} idx={idx} task={task}></Task>
-        ))}
+        <div className="w-full">
+          {tasks.length > 0 ? (
+            <>
+              <div className="w-full flex justify-around flex-wrap gap-5">
+                {tasks?.map((task, idx) => (
+                  <Task
+                    refetch={refetch}
+                    key={idx}
+                    idx={idx}
+                    task={task}
+                  ></Task>
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <p className="text-2xl my-20  uppercase text-red-500">
+                you have no task
+              </p>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

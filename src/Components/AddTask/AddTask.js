@@ -67,7 +67,7 @@ const AddTask = () => {
   }
 
   return (
-    <div className="mt-20  border-black border p-3 rounded-lg w-11/12 mx-auto  dark:bg-slate-900 dark:text-white lg:w-1/2">
+    <div className="mt-20   border p-3 rounded-lg w-full max-w-md mx-auto  dark:bg-slate-900 dark:text-white lg:w-1/2">
       <h1 className="text-3xl text-center font-bold">Add New Task</h1>
 
       <div className="mt-20">
@@ -101,19 +101,22 @@ const AddTask = () => {
             <div className="mb-2 block">
               <Label htmlFor="large" value="Add Task" />
             </div>
-            <input
+            <textarea
               required
+              rows={8}
               onChange={(e) => SetTask(e.target.value)}
               id="large"
               type="text"
-              className="w-full h-36  text-2xl "
+              className="w-full   text-2xl"
+              placeholder="task discription"
             />
           </div>
-
-          <Button color="success" type="submit">
-            {" "}
-            submit
-          </Button>
+          <div className="flex justify-center">
+            <Button className="" color="success" type="submit">
+              {" "}
+              submit
+            </Button>
+          </div>
         </form>
       </div>
     </div>

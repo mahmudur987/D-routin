@@ -14,14 +14,16 @@ const auth = getAuth(app);
 const MyNavbar = () => {
   const { user } = useContext(userContext);
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     return signOut(auth)
       .then(() => {})
-      .catch((error) => {});
+      .catch((error) => {
+        console.error("Error", error);
+      });
   };
 
   return (
-    <div className=" dark:bg-slate-900 dark:text-white">
+    <div className=" dark:bg-slate-900 dark:text-white relative my-10">
       <Navbar fluid={true} rounded={true}>
         <NavbarBrand>
           <img
@@ -30,11 +32,12 @@ const MyNavbar = () => {
             alt="Flowbite Logo"
           />
           <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-            D-Routin
+            D-Routin OF
           </span>
+          <span className="mx-3 uppercase">{user?.displayName}</span>
         </NavbarBrand>
         <NavbarToggle />
-        <NavbarCollapse>
+        <NavbarCollapse className="flex items-center">
           <Link to={"/"}>ADD TASK</Link>
           <Link to={"/mytask"}>MY TASKS</Link>
           <Link to={"/completetask"}>COMPLETED TASKS</Link>
@@ -50,10 +53,6 @@ const MyNavbar = () => {
               <Link to={"/signup"}>SIGNUP</Link>
             </>
           )}
-
-          <Link>
-            <Switcher></Switcher>
-          </Link>
         </NavbarCollapse>
       </Navbar>
     </div>

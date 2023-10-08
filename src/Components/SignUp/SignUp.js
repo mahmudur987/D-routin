@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
@@ -8,11 +8,12 @@ import {
 } from "firebase/auth";
 import app from "../../Firebase/Firebase.config";
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
+import { userContext } from "../../App";
 const auth = getAuth(app);
 
 const SignUp = () => {
   const [loading, Setloading] = useState(false);
-
+  const { Setuser } = useContext(userContext);
   const [error, SetError] = useState("");
   const [photo, setphoto] = useState(null);
 
@@ -44,15 +45,14 @@ const SignUp = () => {
           createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
               const user = result.user;
-              console.log(user);
-
+              Setuser(user);
+              // console.log(user);
               handleUpdateProfile(name, photoURL);
               navigate(from, { replace: true });
             })
             .catch((error) => {
               const errorMessage = error.message;
               SetError(errorMessage);
-              // ..
             });
         }
       });
@@ -63,9 +63,11 @@ const SignUp = () => {
       displayName: name,
       photoURL: photoURL,
     };
-    console.log(profile);
+
     updateProfile(auth.currentUser, profile)
-      .then(() => {})
+      .then((result) => {
+        console.log(result.user);
+      })
       .catch((error) => {
         SetError(error.message);
       });
@@ -80,7 +82,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className="md:w-9/12 lg:2/3 w-11/12 mx-auto dark:bg-slate-900 dark:text-white">
+    <div className="md:w-9/12 lg:2/3 mx-auto dark:bg-slate-900 dark:text-white">
       <h1 className="text-4xl underline font-extrabold m-3 p-3">SIGN UP</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

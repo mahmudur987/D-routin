@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from "../../Firebase/Firebase.config";
-import { Button, Checkbox, Label, Spinner, TextInput } from "flowbite-react";
+import { Button, Label, Spinner, TextInput } from "flowbite-react";
+import { userContext } from "../../App";
 const auth = getAuth(app);
 
 const LogIn = () => {
   const [error, SetError] = useState("");
   const [loading, Setloading] = useState(false);
-
+  const { Setuser } = useContext(userContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -24,6 +25,7 @@ const LogIn = () => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
+        Setuser(user);
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -41,7 +43,7 @@ const LogIn = () => {
   }
 
   return (
-    <div className="md:w-9/12 lg:7/12 mx-auto w-11/12  dark:bg-slate-900 dark:text-white ">
+    <div className="md:w-9/12 lg:2/3 mx-auto  dark:bg-slate-900 dark:text-white ">
       <h1 className="text-4xl underline font-extrabold m-3 p-3">Log In</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

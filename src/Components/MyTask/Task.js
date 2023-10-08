@@ -77,7 +77,7 @@ const Task = ({ idx, task, refetch }) => {
   };
 
   return (
-    <div className="border border-black shadow-xl m-3 rounded-xl  dark:bg-slate-900 dark:text-white">
+    <div className=" max-w-lg w-full border border-black shadow-xl m-3 rounded-xl  dark:bg-slate-900 dark:text-white">
       <UpdateModal
         handleNewTaskSubmit={handleNewTaskSubmit}
         idx={idx}
@@ -92,13 +92,13 @@ const Task = ({ idx, task, refetch }) => {
           My task {idx + 1}
         </h5>
         <p className="">
-          <img className=" h-32 mx-auto" src={task?.photoURL} alt="" />
+          <img className=" h-32 mx-auto" src={task.photoURL} alt="" />
         </p>
-        <p className="font-normal text-gray-700 dark:text-gray-100">
+        <p className="font-normal text-gray-700 dark:text-gray-400">
           {task.task}
         </p>
         <div className="flex justify-around ">
-          <Button onClick={() => handleTaskDelete(task?._id)} className="">
+          <Button onClick={() => handleTaskDelete(task._id)} className="">
             DELETE
           </Button>
           <Button
@@ -110,13 +110,13 @@ const Task = ({ idx, task, refetch }) => {
           </Button>
           <Button
             onClick={handleNewTaskComplete}
-            className={complete ? "hidden" : " p-0"}
+            className={complete ? "hidden" : " p-1"}
           >
             COMPLETE
           </Button>
           <Button
             onClick={handleNewTaskNotComplete}
-            className={complete ? " p-0" : "hidden"}
+            className={complete ? " p-1" : "hidden"}
           >
             NOT COMPLETED
           </Button>
