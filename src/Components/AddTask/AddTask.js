@@ -70,7 +70,7 @@ const AddTask = () => {
     <div className="mt-20   border p-3 rounded-lg w-full max-w-md mx-auto  dark:bg-slate-900 dark:text-white lg:w-1/2">
       <h1 className="text-3xl text-center font-bold">Add New Task</h1>
 
-      <div className="mt-20">
+      <div className="mt-5">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
             <div className="mb-2 block">
@@ -103,7 +103,7 @@ const AddTask = () => {
             </div>
             <textarea
               required
-              rows={8}
+              rows={5}
               onChange={(e) => SetTask(e.target.value)}
               id="large"
               type="text"

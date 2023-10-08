@@ -4,7 +4,7 @@ import { NavbarCollapse } from "flowbite-react/lib/esm/components/Navbar/NavbarC
 import { NavbarToggle } from "flowbite-react/lib/esm/components/Navbar/NavbarToggle";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import Switcher from "../DarkSide/Switcher";
+
 import { getAuth, signOut } from "firebase/auth";
 import app from "../../Firebase/Firebase.config";
 import { userContext } from "../../App";
