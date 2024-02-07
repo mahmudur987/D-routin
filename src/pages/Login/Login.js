@@ -11,7 +11,7 @@ const auth = getAuth(app);
 const LogIn = () => {
   const [error, SetError] = useState("");
   const [loading, Setloading] = useState(false);
-  const { Setuser } = useContext(userContext);
+  const { Setuser, user } = useContext(userContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -38,20 +38,26 @@ const LogIn = () => {
   if (loading) {
     return <LoadingSpinar />;
   }
-
+  console.log(user);
   return (
     <div className="md:w-9/12 lg:w-1/2 mx-auto  dark:bg-slate-900 dark:text-white flex flex-col gap-10 ">
       <h1 className="text-4xl uppercase font-extrabold m-3 p-3">Log In</h1>
-
+      {!user && (
+        <p>
+          Test Email: polash@gmail.com
+          <br />
+          Test Pass: 123456
+        </p>
+      )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-10">
         <div>
-          <div className="mb-2 block">
+          <div className="mb-2 block text-start font-semibold ">
             <p>Your Email</p>
           </div>
           <TextInput name="email" type="email" required={true} />
         </div>
         <div>
-          <div className="mb-2 block">
+          <div className="mb-2 block text-start font-semibold">
             <Label htmlFor="password1" value="Your password" />
           </div>
           <TextInput name="password" type="text" required={true} />

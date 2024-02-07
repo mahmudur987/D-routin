@@ -1,4 +1,4 @@
-import { Button, Card } from "flowbite-react";
+import { Button } from "flowbite-react";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import UpdateModal from "./UpdateModal";
