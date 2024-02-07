@@ -7,8 +7,9 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../../Firebase/Firebase.config";
-import { Button, Label, Spinner, TextInput } from "flowbite-react";
+import { Button, Label, TextInput } from "flowbite-react";
 import { userContext } from "../../App";
+import LoadingSpinar from "../../Components/common/LoadingSpinar/LoadingSpinar";
 const auth = getAuth(app);
 
 const SignUp = () => {
@@ -74,18 +75,14 @@ const SignUp = () => {
     Setloading(false);
   };
   if (loading) {
-    return (
-      <div className="flex items-center w-full h-96 justify-center">
-        <Spinner aria-label="Extra large spinner example" size="xl" />
-      </div>
-    );
+    return <LoadingSpinar />;
   }
 
   return (
-    <div className="md:w-9/12 lg:2/3 mx-auto dark:bg-slate-900 dark:text-white">
-      <h1 className="text-4xl underline font-extrabold m-3 p-3">SIGN UP</h1>
+    <div className="md:w-9/12 lg:w-1/2 mx-auto dark:bg-slate-900 dark:text-white flex flex-col gap-8">
+      <h1 className="text-4xl uppercase font-extrabold m-3 p-3">SIGN UP</h1>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-8">
         <div>
           <div className="mb-2 block">
             <p>Your Name</p>

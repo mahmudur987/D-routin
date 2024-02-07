@@ -2,9 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { Spinner } from "flowbite-react";
 import React, { useContext } from "react";
 import { userContext } from "../../App";
-import Task from "./Task";
+import Task from "../../Components/MyTask/Task";
+import LoadingSpinar from "../../Components/common/LoadingSpinar/LoadingSpinar";
 
-const MyTasks = () => {
+const CompleteTasks = () => {
   const { user } = useContext(userContext);
   const {
     isLoading,
@@ -12,21 +13,17 @@ const MyTasks = () => {
     data: tasks,
     refetch,
   } = useQuery({
-    queryKey: ["tasks", `${user?.email}`],
+    queryKey: ["completetasks", `${user?.email}`],
     queryFn: () =>
       fetch(
-        `https://my-tasks-server.vercel.app/tasks?email=${user?.email}`
+        `https://my-tasks-server-gzb2n5npn-mahmudur987.vercel.app/completetasks?email=${user?.email}`
       ).then((res) => res.json()),
   });
 
   console.log(tasks);
 
   if (isLoading) {
-    return (
-      <div className="flex items-center w-full h-96 justify-center   dark:bg-slate-900 dark:text-white">
-        <Spinner aria-label="Extra large spinner example" size="xl" />
-      </div>
-    );
+    return <LoadingSpinar />;
   }
 
   if (error) {
@@ -36,7 +33,7 @@ const MyTasks = () => {
   return (
     <div className="container mx-auto   dark:bg-slate-900 dark:text-white">
       <div className="mt-10  flex justify-center flex-col items-center gap-10">
-        <h1 className="text-3xl font-bold">MY TASKS</h1>
+        <h1 className="text-3xl font-bold">MY COMPLETED TASKS</h1>
 
         <div className="w-full">
           {tasks.length > 0 ? (
@@ -55,7 +52,7 @@ const MyTasks = () => {
           ) : (
             <>
               <p className="text-2xl my-20  uppercase text-red-500">
-                you have no task
+                no data to show
               </p>
             </>
           )}
@@ -65,4 +62,4 @@ const MyTasks = () => {
   );
 };
 
-export default MyTasks;
+export default CompleteTasks;

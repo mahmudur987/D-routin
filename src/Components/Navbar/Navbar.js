@@ -1,16 +1,10 @@
-import { Navbar } from "flowbite-react";
-import { NavbarBrand } from "flowbite-react/lib/esm/components/Navbar/NavbarBrand";
-import { NavbarCollapse } from "flowbite-react/lib/esm/components/Navbar/NavbarCollapse";
-import { NavbarToggle } from "flowbite-react/lib/esm/components/Navbar/NavbarToggle";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-
 import { getAuth, signOut } from "firebase/auth";
 import app from "../../Firebase/Firebase.config";
 import { userContext } from "../../App";
 
 const auth = getAuth(app);
-
 const MyNavbar = () => {
   const { user } = useContext(userContext);
 
@@ -21,40 +15,79 @@ const MyNavbar = () => {
         console.error("Error", error);
       });
   };
+  const menuItems = (
+    <>
+      <li>
+        <Link to={"/"}>ADD TO DO</Link>
+      </li>
 
+      <li>
+        <Link to={"/mytask"}>MY TO DO</Link>
+      </li>
+      <li>
+        <Link to={"/completetask"}>COMPLETED TASKS</Link>
+      </li>
+      <li>
+        <Link to={"/counter"}>COUNTER</Link>
+      </li>
+
+      {user ? (
+        <li>
+          {" "}
+          <button onClick={handleSignOut}>SIGNOUT</button>
+        </li>
+      ) : (
+        <>
+          <li>
+            <Link to={"/signup"}>SIGNUP</Link>
+          </li>
+          <li>
+            <Link to={"/login"}>LOGIN</Link>
+          </li>
+        </>
+      )}
+    </>
+  );
   return (
-    <div className=" dark:bg-slate-900 dark:text-white relative my-10">
-      <Navbar fluid={true} rounded={true}>
-        <NavbarBrand>
-          <img
-            src="https://www.pngkit.com/png/detail/770-7704437_daily-routine-clipart-businessman-daily-routine-concept-imagens.png"
-            className="mr-3 h-6 sm:h-9"
-            alt="Flowbite Logo"
-          />
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-            D-Routin OF
-          </span>
-          <span className="mx-3 uppercase">{user?.displayName}</span>
-        </NavbarBrand>
-        <NavbarToggle />
-        <NavbarCollapse className="flex items-center">
-          <Link to={"/"}>ADD TASK</Link>
-          <Link to={"/mytask"}>MY TASKS</Link>
-          <Link to={"/completetask"}>COMPLETED TASKS</Link>
-          <Link to={"/counter"}>COUNTER</Link>
-
-          {user ? (
-            <Link>
-              <button onClick={handleSignOut}>SIGNOUT</button>
-            </Link>
-          ) : (
-            <>
-              <Link to={"/login"}>LOGIN</Link>
-              <Link to={"/signup"}>SIGNUP</Link>
-            </>
-          )}
-        </NavbarCollapse>
-      </Navbar>
+    <div className="container  navbar pt-5">
+      <div className="navbar-start flex gap-3">
+        <Link to={"/"} className="btn btn-ghost text-xl">
+          D-Routin
+        </Link>
+        {user && <span>of</span>}
+        {user && (
+          <span className="uppercase text-pink-300">{user?.displayName}</span>
+        )}
+      </div>
+      <div className="navbar-center w-4/5  hidden lg:flex justify-end">
+        <ul className="menu menu-horizontal px-1">{menuItems}</ul>
+      </div>
+      <div className="navbar-end">
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box left-[-150px]"
+          >
+            {menuItems}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import AddTask from "../Components/AddTask/AddTask";
-import CompleteTasks from "../Components/CopleteTask/CompleteTasks";
-import Login from "../Components/Login/Login";
-import MyTasks from "../Components/MyTask/MyTasks";
-import SignUp from "../Components/SignUp/SignUp";
+
 import CounterPage from "../CounterPage/CounterPage";
 import Main from "../Layouts/Main";
+import AddTask from "../pages/AddTask/AddTask";
+import MyTasks from "../pages/MyTask/MyTasks";
+import CompleteTasks from "../pages/CompleteTask/CompleteTasks";
+import LogIn from "../pages/Login/Login";
+import SignUp from "../pages/SignUp/SignUp";
 
 export const routes = createBrowserRouter([
   {
@@ -14,27 +15,27 @@ export const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <AddTask></AddTask>,
+        element: <AddTask />,
       },
       {
         path: "/mytask",
-        element: <MyTasks></MyTasks>,
+        element: <MyTasks />,
       },
       {
         path: "/completetask",
-        element: <CompleteTasks></CompleteTasks>,
+        element: <CompleteTasks />,
       },
       {
         path: "/counter",
-        element: <CounterPage></CounterPage>,
+        element: <CounterPage />,
       },
       {
         path: "/login",
-        element: <Login></Login>,
+        element: <LogIn />,
       },
       {
         path: "/signup",
-        element: <SignUp></SignUp>,
+        element: <SignUp />,
       },
       {
         path: "*",

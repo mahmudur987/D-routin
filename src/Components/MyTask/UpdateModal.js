@@ -17,24 +17,23 @@ const UpdateModal = ({
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
-                <div className="flex items-center justify-between p-5 text-black border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-3xl text-black font-semibold">
-                    MY Task {idx + 1}
+                <div className="flex justify-between p-3">
+                  <h3 className="text-xl text-black font-semibold">
+                    Update The To-do {idx + 1}
                   </h3>
                   <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    className="text-black "
                     onClick={() => setShowModal(false)}
                   >
-                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                      my
-                    </span>
+                    x
                   </button>
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto text-black">
                   <textarea
                     onChange={(e) => setNewTask(e.target.value)}
-                    className="w-2/3 h-full"
+                    className="w-full h-full border border-gray-500"
+                    rows={7}
                     type="text"
                     defaultValue={task.task}
                   />
