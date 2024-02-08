@@ -40,7 +40,7 @@ const LogIn = () => {
   }
   console.log(user);
   return (
-    <div className="md:w-9/12 lg:w-1/2 mx-auto  dark:bg-slate-900 dark:text-white flex flex-col gap-10 ">
+    <div className="max-w-lg w-full mx-auto  dark:bg-slate-900 dark:text-white flex flex-col gap-10 ">
       <h1 className="text-4xl uppercase font-extrabold m-3 p-3">Log In</h1>
       {!user && (
         <p>

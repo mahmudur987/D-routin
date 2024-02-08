@@ -32,7 +32,9 @@ const CompleteTasks = () => {
   return (
     <div className="container mx-auto   dark:bg-slate-900 dark:text-white">
       <div className="mt-10  flex justify-center flex-col items-center gap-10">
-        <h1 className="text-3xl font-bold">MY COMPLETED TASKS</h1>
+        <h1 className="text-3xl font-bold">
+          MY COMPLETED TASKS ( {tasks.length})
+        </h1>
 
         <div className="w-full">
           {tasks.length > 0 ? (

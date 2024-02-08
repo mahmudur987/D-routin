@@ -1,5 +1,5 @@
 import { Button, Label, TextInput } from "flowbite-react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { userContext } from "../../App";
@@ -56,6 +56,8 @@ const AddTask = () => {
                   e.target.reset();
                   toast.success("your task is added successfully");
                   setloading(false);
+                  localStorage.removeItem("task");
+                  SetTask("");
                 }
               })
               .catch((error) => {
@@ -80,6 +82,8 @@ const AddTask = () => {
             e.target.reset();
             toast.success("your task is added", { id: 1 });
             setloading(false);
+            localStorage.removeItem("task");
+            SetTask("");
           } else if (data.status === "failed") {
             toast.error(data?.message, { id: 2 });
           }
@@ -89,6 +93,19 @@ const AddTask = () => {
           toast.error("Error Happen", { id: 5 });
         });
     }
+  };
+  useEffect(() => {
+    const savedTask = localStorage.getItem("task");
+    if (savedTask) {
+      SetTask(savedTask);
+    }
+  }, [SetTask]);
+
+  const handleTaskChange = (e) => {
+    const newTask = e.target.value;
+    SetTask(newTask);
+    // Store the task text in localStorage
+    localStorage.setItem("task", newTask);
   };
 
   if (loading) {
@@ -165,7 +182,8 @@ const AddTask = () => {
             <textarea
               required
               rows={5}
-              onChange={(e) => SetTask(e.target.value)}
+              value={task}
+              onChange={handleTaskChange}
               id="large"
               type="text"
               className="w-full"
